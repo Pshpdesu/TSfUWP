@@ -11,8 +11,8 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Width="auto" Height="auto">
-        <ListView SelectionMode="None" DataContext="{x:Bind ListOfMessages}">
+    <Grid Width="auto" Height="auto" Background="Red">
+        <ListView SelectionMode="None" ItemsSource="{x:Bind ListOfMessages}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="ccl:Comment">
                     <CC:CommentItem Message="{x:Bind}"></CC:CommentItem>

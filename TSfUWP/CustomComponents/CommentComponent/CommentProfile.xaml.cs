@@ -38,17 +38,17 @@ namespace CustomComponents.CommentComponent
         {
             get
             {
-                if (UserProfile.ProfilePicture.DecodePixelWidth > 0)
+                if (!(UserProfile.ProfilePicture is null))
                 {
                     return UserProfile.ProfilePicture;
                 }
                 else
                 {
-                    var file =
-                        StorageFile
-                        .GetFileFromApplicationUriAsync(new Uri("ms-appx:///CustomComponents/Assets/Test.png"))
-                        .GetResults();
-                    using (var stream = file.OpenAsync(FileAccessMode.Read).GetResults())
+                    var file = Task.Run(async () =>
+                        await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///CustomComponents/Assets/Test.png"))
+                    );
+                    var str = Task.Run(async () => await file.Result.OpenAsync(FileAccessMode.Read)).Result;
+                    using (var stream = str)
                     {
                         var res = new BitmapImage();
                         res.SetSource(stream);

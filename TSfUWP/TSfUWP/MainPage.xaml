@@ -10,6 +10,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ccc:CommentList ListOfMessages="{x:Bind comments}"></ccc:CommentList>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ccc:CommentItem Grid.Row="0" Message="{x:Bind comment}"></ccc:CommentItem>
+        <ccc:CommentList Grid.Row="1" ListOfMessages="{x:Bind comments}"></ccc:CommentList>
+        
     </Grid>
 </Page>

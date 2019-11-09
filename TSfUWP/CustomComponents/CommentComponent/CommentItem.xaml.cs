@@ -27,6 +27,7 @@ namespace CustomComponents.CommentComponent
         public CommentItem()
         {
             this.InitializeComponent();
+            Message = new Comment();
         }
     }
 }

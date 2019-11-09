@@ -24,7 +24,7 @@
             UserProfile="{x:Bind Message.UserProfile}"/>
         <TextBlock 
             Grid.Column="1" Grid.Row="0" 
-            DataContext="{x:Bind Message.CommentBody}"/>
+            Text="{x:Bind Message.CommentBody}"/>
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>

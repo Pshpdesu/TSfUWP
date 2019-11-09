@@ -9,7 +9,7 @@
     d:DesignHeight="100"
     d:DesignWidth="100">
 
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue">
         <Grid x:Name="ProfileImage">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -23,13 +23,13 @@
                      Width="25"
                      Height="25">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{x:Bind ProfilePic}"/>
+                    <ImageBrush ImageSource="{x:Bind ProfilePic}" Stretch="Fill"/>
                 </Ellipse.Fill>
             </Ellipse>
             
             <TextBlock Grid.Row="1" Grid.Column="0"
                        x:Name="ProfileName" 
-                       DataContext="{x:Bind UserProfile.Name}"
+                       Text="{x:Bind UserProfile.Name}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top">
             </TextBlock>

@@ -26,10 +26,12 @@ namespace TSfUWP
     public sealed partial class MainPage : Page
     {
         public ObservableCollection<Comment> comments { get; set; } = new ObservableCollection<Comment>();
+        public Comment comment { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
             comments = GenerateComments();
+            comment = GenerateComments().First();
         }
 
         private ObservableCollection<Comment> GenerateComments()

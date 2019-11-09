@@ -33,12 +33,12 @@ namespace CustomComponents.CommentComponent
             }
             set
             {
-                SetValue(commentListProp, 
-                    value is IObservable<Comment> 
-                    ? value 
+                SetValue(commentListProp,
+                    value is IObservable<Comment>
+                    ? value
                     : new ObservableCollection<Comment>(value));
             }
-        }
+        } 
         public CommentList()
         {
             this.InitializeComponent();
