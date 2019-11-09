@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,15 +25,31 @@ namespace TSfUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<Comment> comments { get; set; } = new ObservableCollection<Comment>();
         public MainPage()
         {
             this.InitializeComponent();
+            comments = GenerateComments();
+        }
+
+        private ObservableCollection<Comment> GenerateComments()
+        {
+            var res = new LinkedList<Comment>();
+            for (int i = 0; i < 5; i++)
+            {
+                res.AddLast(new Comment()
+                {
+                    UserProfile = UserProfile.GetRandomProfile(),
+                    CommentBody = DateTime.Now.ToString()+": Comment"
+                });
+            }
+            return new ObservableCollection<Comment>(res);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var test = await UserProfile.GetRandomProfile();
+            var test = UserProfile.GetRandomProfile();
         }
     }
 }

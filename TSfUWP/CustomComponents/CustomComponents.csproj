@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9C627F9-4AF7-4EC8-A135-A0BA4C81C5DD}</ProjectGuid>
-    <OutputType>winmdobj</OutputType>
+    <ProjectGuid>{FDC4986F-1AAD-4A25-BFB0-EE45F24606BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Custom_Components</RootNamespace>
-    <AssemblyName>Custom Components</AssemblyName>
+    <RootNamespace>CustomComponents</RootNamespace>
+    <AssemblyName>CustomComponents</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -121,17 +121,16 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Comment.xaml.cs">
-      <DependentUpon>Comment.xaml</DependentUpon>
+    <Compile Include="CommentComponent\CommentItem.xaml.cs">
+      <DependentUpon>CommentItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommentProfile\CommentProfile.xaml.cs">
+    <Compile Include="CommentComponent\CommentList.xaml.cs">
+      <DependentUpon>CommentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommentComponent\CommentProfile.xaml.cs">
       <DependentUpon>CommentProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommentProfile\CommentProfileViewModel.cs" />
-    <Compile Include="Profile.xaml.cs">
-      <DependentUpon>Profile.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="CommentComponent\UserComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +139,20 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Comment.xaml">
-      <SubType>Designer</SubType>
+    <Content Include="Assets\Test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CommentComponent\CommentItem.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="CommentProfile\CommentProfile.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="CommentComponent\CommentList.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Profile.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="CommentComponent\CommentProfile.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -159,11 +161,11 @@
       <Name>TestSolutionLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Test.png" />
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

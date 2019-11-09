@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="CustomComponents.CommentComponent.CommentList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomComponents.CommentComponent"
+    xmlns:ccl="using:TestSolutionLibrary"
+    xmlns:CC="using:CustomComponents.CommentComponent" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Width="auto" Height="auto">
+        <ListView SelectionMode="None" DataContext="{x:Bind ListOfMessages}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="ccl:Comment">
+                    <CC:CommentItem Message="{x:Bind}"></CC:CommentItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

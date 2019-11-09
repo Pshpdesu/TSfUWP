@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -156,6 +156,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
+      <Project>{fdc4986f-1aad-4a25-bfb0-ee45f24606bc}</Project>
+      <Name>CustomComponents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestSolutionLibrary\TestSolutionLibrary.csproj">
       <Project>{4CD1CFAA-9449-4BDE-9C64-444CB5E924D4}</Project>
       <Name>TestSolutionLibrary</Name>

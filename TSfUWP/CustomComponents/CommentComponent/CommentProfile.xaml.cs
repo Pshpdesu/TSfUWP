@@ -14,18 +14,49 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace CustomComponents.CommentProfile
+namespace CustomComponents.CommentComponent
 {
     public sealed partial class CommentProfile : UserControl
     {
-        public DependencyProperty OverlayBrushProperty =
+        public static readonly DependencyProperty OverlayBrushProperty =
             DependencyProperty.Register("OverlayBrush", typeof(Brush), typeof(CommentProfile), null);
+        public static readonly DependencyProperty ProfileProperty =
+            DependencyProperty.Register("Profile", typeof(UserProfile), typeof(CommentProfile), null);
 
-        CommentProfileViewModel viewModel { get; set; }
+        public UserProfile UserProfile
+        {
+            get { return GetValue(ProfileProperty) as UserProfile; }
+            set { SetValue(ProfileProperty, value); }
+        }
+
+        public BitmapImage ProfilePic
+        {
+            get
+            {
+                if (UserProfile.ProfilePicture.DecodePixelWidth > 0)
+                {
+                    return UserProfile.ProfilePicture;
+                }
+                else
+                {
+                    var file =
+                        StorageFile
+                        .GetFileFromApplicationUriAsync(new Uri("ms-appx:///CustomComponents/Assets/Test.png"))
+                        .GetResults();
+                    using (var stream = file.OpenAsync(FileAccessMode.Read).GetResults())
+                    {
+                        var res = new BitmapImage();
+                        res.SetSource(stream);
+                        return res;
+                    }
+                }
+            }
+        }
 
         public Brush OverlayBrush
         {
@@ -36,7 +67,6 @@ namespace CustomComponents.CommentProfile
         public CommentProfile()
         {
             this.InitializeComponent();
-            viewModel.userProfile = UserProfile.GetRandomProfile();
             //Initializer = (async ()=> { this.viewModel.userProfile = await UserProfile.GetRandomProfile(); })();
         }
 

@@ -14,7 +14,7 @@ namespace TestSolutionLibrary
         public string Name { get; set; }
         public BitmapImage ProfilePicture { get; set; }
         //.....
-        UserProfile()
+        public UserProfile()
         {
         }
         public static UserProfile GetRandomProfile()

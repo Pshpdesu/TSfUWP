@@ -1,15 +1,15 @@
 ﻿<UserControl
-    x:Class="CustomComponents.CommentProfile.CommentProfile"
+    x:Class="CustomComponents.CommentComponent.CommentProfile"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CustomComponents.CommentProfile"
+    xmlns:local="using:CustomComponents.CommentComponent"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="100"
     d:DesignWidth="100">
 
-    <Grid>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid x:Name="ProfileImage">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -18,12 +18,21 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Grid.Column="0"
-                   x:Name="ProfilePic" 
-                   DataContext="{x:Bind viewModel.profilePic}"/>
+
+            <Ellipse Grid.Row="0" Grid.Column="0" 
+                     Width="25"
+                     Height="25">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{x:Bind ProfilePic}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            
             <TextBlock Grid.Row="1" Grid.Column="0"
                        x:Name="ProfileName" 
-                       DataContext="{x:Bind viewModel.userProfile.Name}"/>
+                       DataContext="{x:Bind UserProfile.Name}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top">
+            </TextBlock>
         </Grid>
     </Grid>
 </UserControl>
