@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TestSolutionLibrary;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,7 +38,7 @@ namespace TSfUWP
         private ObservableCollection<Comment> GenerateComments()
         {
             var res = new LinkedList<Comment>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 100; i++)
             {
                 res.AddLast(new Comment()
                 {
@@ -52,6 +53,10 @@ namespace TSfUWP
         {
             base.OnNavigatedTo(e);
             var test = UserProfile.GetRandomProfile();
+        }
+
+        private async Task<Control> testControlCreation()
+        {
         }
     }
 }

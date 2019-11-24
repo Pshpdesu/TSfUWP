@@ -6,32 +6,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="100"
-    d:DesignWidth="100">
+    d:DesignHeight="200"
+    d:DesignWidth="200">
 
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Margin="10"
+          MinHeight="86" MinWidth="70">
         <Grid x:Name="ProfileImage">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Ellipse Grid.Row="0" Grid.Column="0" 
-                     Width="25"
-                     Height="25">
+            <Ellipse x:Name="ProfileEllipse" Grid.Row="0" Grid.Column="0" 
+                     HorizontalAlignment="Stretch"
+                     Height="{Binding ElementName=ProfileEllipse, Path=Width}"
+                     
+                     >
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{x:Bind ProfilePic}" Stretch="Fill"/>
                 </Ellipse.Fill>
             </Ellipse>
             
             <TextBlock Grid.Row="1" Grid.Column="0"
+                       TextAlignment="Center"                       
+                       FontSize="10"
                        x:Name="ProfileName" 
                        Text="{x:Bind UserProfile.Name}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top">
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Center">
             </TextBlock>
         </Grid>
     </Grid>
