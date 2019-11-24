@@ -55,8 +55,8 @@ namespace TSfUWP
             var test = UserProfile.GetRandomProfile();
         }
 
-        private async Task<Control> testControlCreation()
-        {
-        }
+        //private async Task<Control> testControlCreation()
+        //{
+        //}
     }
 }

@@ -33,16 +33,16 @@ namespace CustomComponents.CommentComponent
 
         void SetUpComposition()
         {
-            var compositor = ElementCompositionPreview.GetElementVisual(this.).Compositor;
-            var spriteVisual = compositor.CreateSpriteVisual();
-            spriteVisual.Size = this.grid.RenderSize.ToVector2();
+            //var compositor = ElementCompositionPreview.GetElementVisual(this.).Compositor;
+            //var spriteVisual = compositor.CreateSpriteVisual();
+            //spriteVisual.Size = this.grid.RenderSize.ToVector2();
 
-            var dropShadow = compositor.CreateDropShadow();
-            dropShadow.Mask = this.txtBlock.GetAlphaMask();
-            dropShadow.Offset = new Vector3(10, 10, 0);
-            spriteVisual.Shadow = dropShadow;
+            //var dropShadow = compositor.CreateDropShadow();
+            //dropShadow.Mask = this.txtBlock.GetAlphaMask();
+            //dropShadow.Offset = new Vector3(10, 10, 0);
+            //spriteVisual.Shadow = dropShadow;
 
-            ElementCompositionPreview.SetElementChildVisual(this.grid, spriteVisual);
+            //ElementCompositionPreview.SetElementChildVisual(this.grid, spriteVisual);
         }
     }
 }

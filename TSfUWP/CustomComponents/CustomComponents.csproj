@@ -121,6 +121,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AlbumView\AlbumView.xaml.cs">
+      <DependentUpon>AlbumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommentComponent\CommentItem.xaml.cs">
       <DependentUpon>CommentItem.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
     <Content Include="Assets\Test.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AlbumView\AlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommentComponent\CommentItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,9 +171,7 @@
       <Name>TestSolutionLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
