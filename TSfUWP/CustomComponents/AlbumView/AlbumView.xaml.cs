@@ -25,6 +25,10 @@ namespace CustomComponents.AlbumView
         public AlbumView()
         {
             this.InitializeComponent();
+            var brush = new SolidColorBrush();
+            brush.Color = new Windows.UI.Color() { A = 180 };
+
+            grid.Background = brush;
         }
 
         bool manipstarted = false;
@@ -37,7 +41,10 @@ namespace CustomComponents.AlbumView
             manipstarted = true;
             var curMode = e.Mode;
             //manipstarted = e.Mode == ManipulationModes.TranslateX;
-            isPicSmaller = (img.ActualHeight <= sv.ActualHeight) || (img.ActualWidth <= sv.ActualWidth);
+            //typedSender.
+            isPicSmaller = typedSender.ZoomFactor <= 1;
+            //isPicSmaller = (img.Height <= sv.ActualHeight) || (img.Width<= sv.ActualWidth);
+           
         }
 
         private void ScrollViewer_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
@@ -48,21 +55,34 @@ namespace CustomComponents.AlbumView
         private void ScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             //if ((Math.Abs(e.Cumulative.Translation.X) < 100) || (Math.Abs(e.Cumulative.Translation.Y) < 100))
-                grid.Transform3D = null;
+            img.Transform3D = null;
             manipstarted = false;
+            img.Opacity = 1.0;
         }
 
         private void ScrollViewer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             bool isIntertial = e.IsInertial;
             if (isPicSmaller && manipstarted)
-            { 
+            {
                 var test = new CompositeTransform3D();
                 test.TranslateX = e.Cumulative.Translation.X;
                 test.TranslateY = e.Cumulative.Translation.Y;
-                grid.Transform3D = test;
-                var visibility = new Vector3((float)test.TranslateX, (float)test.TranslateY,0);
-                grid.Opacity = 100-visibility.Length();
+                test.CenterX = img.ActualWidth/ 2;
+                test.CenterY = img.ActualHeight/ 2;
+                test.RotationZ = e.Cumulative.Translation.X/50.0;
+                //test.RotationZ = e.Cumulative.Translation.Y;
+
+                img.Transform3D = test;
+                var visibility = new Vector3((float)test.TranslateX, (float)test.TranslateY, 0);
+                var normalizedLength = visibility.Length() / 500.0;
+                img.Opacity = 1.0 - (Math.Pow(normalizedLength, 2) - normalizedLength);
+            }
+            else
+            {
+                var sv = sender as ScrollViewer;
+                var newManip = e;
+
             }
 
             //sv.TranslationTransition = new Vector3Transition() { Components = e.Cumulative.Translation };

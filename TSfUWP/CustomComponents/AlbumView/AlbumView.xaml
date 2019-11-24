@@ -11,12 +11,18 @@
 
     <Grid x:Name="grid"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="AliceBlue">
         <ScrollViewer x:Name="sv"
+                      HorizontalScrollMode="Auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      ZoomMode="Enabled"
                       ManipulationMode="All" 
                       ManipulationStarted="ScrollViewer_ManipulationStarted" 
                       ManipulationStarting="ScrollViewer_ManipulationStarting"
                       ManipulationCompleted="ScrollViewer_ManipulationCompleted"
                       ManipulationDelta="ScrollViewer_ManipulationDelta">
-            <Image x:Name="img" Stretch="Uniform" 
+            <Image x:Name="img"
+                   Width="{Binding ElementName=grid, Path=Width}"
+                   Height="{Binding ElementName=grid, Path=Height}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform"
                Source="ms-appx:///TestSolutionLibrary/Assets/Test.png"></Image>
             <!--<Image Width="100" Height="100"  Source="/Assets/Test.png"></Image>-->
         </ScrollViewer>
