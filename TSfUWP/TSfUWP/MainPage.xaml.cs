@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomComponents.AlbumView;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,6 +10,7 @@ using TestSolutionLibrary;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,7 +45,7 @@ namespace TSfUWP
                 res.AddLast(new Comment()
                 {
                     UserProfile = UserProfile.GetRandomProfile(),
-                    CommentBody = DateTime.Now.ToString()+": Comment"
+                    CommentBody = DateTime.Now.ToString() + ": Comment"
                 });
             }
             return new ObservableCollection<Comment>(res);
@@ -52,7 +54,40 @@ namespace TSfUWP
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+        }
+
+        private async void Button_ClickAsync2(object sender, RoutedEventArgs e)
+        {
+            var msgdlg = new Flyout();
+            msgdlg.Content = new AlbumView();
+            msgdlg.ShowMode = FlyoutShowMode.Standard;
+            msgdlg.ShouldConstrainToRootBounds = true;
+            msgdlg.ShowAt(this, new FlyoutShowOptions() { Placement = FlyoutPlacementMode.Full });
+        }
+
+        private async void Button_ClickAsync(object sender, RoutedEventArgs e)
+        {
             var test = UserProfile.GetRandomProfile();
+            //var flyout = new Popup()
+            //{
+            //    HorizontalAlignment = HorizontalAlignment.Stretch,
+            //    VerticalAlignment = VerticalAlignment.Stretch,
+            //    ShouldConstrainToRootBounds = true,
+            //    //Width = Window.Current.CoreWindow.Bounds.Width,
+            //    //Height = Window.Current.CoreWindow.Bounds.Height,
+            //    //IsLightDismissEnabled = true,
+            //    Child = new AlbumView(),
+            //    IsOpen = false,
+            //};
+            //Window.Current.Content
+            pop.Child = new AlbumView();
+            pop.IsOpen = true;
+            //flyout.IsOpen = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //private async Task<Control> testControlCreation()

@@ -10,15 +10,38 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="White">
+
+    <Grid x:Name="grid" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="testgrid" Background="Blue" Grid.RowSpan="2">
+            <Popup x:Name="pop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!--IsLightDismissEnabled="True">-->
+            </Popup>
+        </Grid>
         <!--<ccc:CommentItem Grid.Row="0" Message="{x:Bind comment}"></ccc:CommentItem>
         <ccc:CommentList Grid.Row="1" ListOfMessages="{x:Bind comments}"></ccc:CommentList>-->
         <calv:AlbumView Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
         </calv:AlbumView>
-        
+        <StackPanel Grid.Row="2"
+                    VerticalAlignment="Stretch">
+            <Button Click="Button_ClickAsync" 
+                    Background="Bisque" 
+                    HorizontalAlignment="Stretch"
+                    Content="1">
+            </Button>
+            <Button Click="Button_ClickAsync2" 
+                    Background="Red" 
+                    HorizontalAlignment="Stretch"
+                    Width="auto"
+                    Content="2">
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

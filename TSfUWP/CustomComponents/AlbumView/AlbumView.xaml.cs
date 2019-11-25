@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Navigation;
 
@@ -44,7 +45,7 @@ namespace CustomComponents.AlbumView
             //typedSender.
             isPicSmaller = typedSender.ZoomFactor <= 1;
             //isPicSmaller = (img.Height <= sv.ActualHeight) || (img.Width<= sv.ActualWidth);
-           
+
         }
 
         private void ScrollViewer_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
@@ -56,21 +57,23 @@ namespace CustomComponents.AlbumView
         {
             //if ((Math.Abs(e.Cumulative.Translation.X) < 100) || (Math.Abs(e.Cumulative.Translation.Y) < 100))
             img.Transform3D = null;
+            (this.Parent as UIElement).Transform3D = null;
             manipstarted = false;
             img.Opacity = 1.0;
         }
 
         private void ScrollViewer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
+            var sv = sender as ScrollViewer;
             bool isIntertial = e.IsInertial;
             if (isPicSmaller && manipstarted)
             {
                 var test = new CompositeTransform3D();
                 test.TranslateX = e.Cumulative.Translation.X;
                 test.TranslateY = e.Cumulative.Translation.Y;
-                test.CenterX = img.ActualWidth/ 2;
-                test.CenterY = img.ActualHeight/ 2;
-                test.RotationZ = e.Cumulative.Translation.X/50.0;
+                test.CenterX = img.ActualWidth / 2;
+                test.CenterY = img.ActualHeight / 2;
+                test.RotationZ = e.Cumulative.Translation.X / 50.0;
                 //test.RotationZ = e.Cumulative.Translation.Y;
 
                 img.Transform3D = test;
@@ -80,8 +83,18 @@ namespace CustomComponents.AlbumView
             }
             else
             {
-                var sv = sender as ScrollViewer;
+
                 var newManip = e;
+
+            }
+            if (true)
+            {
+                var totalTransition = new Vector3((float)e.Cumulative.Translation.X, (float)e.Cumulative.Translation.Y, 0);
+                if (totalTransition.Length() > 0)
+                {
+                    var parent = this.Parent as Grid;
+                    parent.Transform3D = img.Transform3D;
+                }
 
             }
 
