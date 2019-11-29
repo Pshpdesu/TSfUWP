@@ -26,10 +26,10 @@ namespace CustomComponents.AlbumView
         public AlbumView()
         {
             this.InitializeComponent();
-            var brush = new SolidColorBrush();
-            brush.Color = new Windows.UI.Color() { A = 180 };
+            //var brush = new SolidColorBrush();
+            //brush.Color = new Windows.UI.Color() { A = 180 };
 
-            grid.Background = brush;
+            //grid.Background = brush;
         }
 
         bool manipstarted = false;
@@ -92,7 +92,7 @@ namespace CustomComponents.AlbumView
                 var totalTransition = new Vector3((float)e.Cumulative.Translation.X, (float)e.Cumulative.Translation.Y, 0);
                 if (totalTransition.Length() > 0)
                 {
-                    var parent = this.Parent as Grid;
+                    var parent = this.Parent as UIElement;
                     parent.Transform3D = img.Transform3D;
                 }
 

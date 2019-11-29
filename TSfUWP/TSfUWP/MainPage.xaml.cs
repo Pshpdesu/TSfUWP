@@ -62,7 +62,8 @@ namespace TSfUWP
             msgdlg.Content = new AlbumView();
             msgdlg.ShowMode = FlyoutShowMode.Standard;
             msgdlg.ShouldConstrainToRootBounds = true;
-            msgdlg.ShowAt(this, new FlyoutShowOptions() { Placement = FlyoutPlacementMode.Full });
+            //msgdlg.Placement = FlyoutPlacementMode.;
+            msgdlg.ShowAt(this);
         }
 
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
@@ -80,18 +81,25 @@ namespace TSfUWP
             //    IsOpen = false,
             //};
             //Window.Current.Content
+            var pop = new Popup();
+            //pop.Height = Window.Current.Bounds.Height;
+            //pop.Width= Window.Current.Bounds.Width;
+            pop.VerticalAlignment = VerticalAlignment.Stretch;
+            pop.HorizontalAlignment = HorizontalAlignment.Stretch;
             pop.Child = new AlbumView();
-            pop.IsOpen = true;
             //flyout.IsOpen = true;
+            //await pop.ShowAsync();
+            pop.IsLightDismissEnabled = true;
+            pop.IsOpen = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
 
-        }
-
-        //private async Task<Control> testControlCreation()
-        //{
-        //}
     }
+
+    //private async Task<Control> testControlCreation()
+    //{
+    //}
+}
 }

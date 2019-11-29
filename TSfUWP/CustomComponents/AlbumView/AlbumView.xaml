@@ -9,8 +9,13 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid x:Name="grid"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="AliceBlue">
-        <ScrollViewer x:Name="sv"
+
+    <Grid>
+        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   Fill="Black" Opacity="150">
+        </Rectangle>
+        <Frame Margin="50">
+            <ScrollViewer x:Name="sv"
                       HorizontalScrollMode="Auto"
                       HorizontalScrollBarVisibility="Auto"
                       ZoomMode="Enabled"
@@ -19,12 +24,11 @@
                       ManipulationStarting="ScrollViewer_ManipulationStarting"
                       ManipulationCompleted="ScrollViewer_ManipulationCompleted"
                       ManipulationDelta="ScrollViewer_ManipulationDelta">
-            <Image x:Name="img"
-                   Width="{Binding ElementName=grid, Path=Width}"
-                   Height="{Binding ElementName=grid, Path=Height}"
+                <Image x:Name="img"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform"
                Source="ms-appx:///TestSolutionLibrary/Assets/Test.png"></Image>
-            <!--<Image Width="100" Height="100"  Source="/Assets/Test.png"></Image>-->
-        </ScrollViewer>
+                <!--<Image Width="100" Height="100"  Source="/Assets/Test.png"></Image>-->
+            </ScrollViewer>
+        </Frame>
     </Grid>
 </UserControl>
