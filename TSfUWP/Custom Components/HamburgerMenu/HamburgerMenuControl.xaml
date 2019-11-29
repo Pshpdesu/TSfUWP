@@ -9,8 +9,17 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="HamburgerMenuResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
     <Grid>
-        <SplitView>
+        <SplitView x:Name="HamburgerView">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -19,11 +28,14 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Button Width="48" Height="48">
-                        <FontIcon></FontIcon>
+                        <SymbolIcon Symbol="GlobalNavigationButton" />
                     </Button>
-                    <ListView Grid.Row="1"></ListView>
+                    <ListView x:Name="MenuItemsList" DataContext="{x:Bind MenuItems}">
+                        
+                    </ListView>
                 </Grid>
             </SplitView.Pane>
+            <Border BorderThickness="0" x:Name="Page"></Border>
         </SplitView>
     </Grid>
 </UserControl>

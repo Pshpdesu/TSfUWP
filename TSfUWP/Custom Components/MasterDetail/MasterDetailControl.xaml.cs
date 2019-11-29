@@ -35,7 +35,7 @@ namespace CustomComponents.MasterDetail
 
         public async Task SetDetailsAsync(UIElement newDetails)
         {
-            await Task.Run(() => { SetDetails(newDetails)});
+            await Task.Run(() => { SetDetails(newDetails); });
         }
 
         public void SetMaster(UIElement newMaster)

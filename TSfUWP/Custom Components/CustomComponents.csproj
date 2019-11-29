@@ -132,6 +132,7 @@
     <Compile Include="HamburgerMenu\HamburgerMenuControl.xaml.cs">
       <DependentUpon>HamburgerMenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HamburgerMenu\MenuItem.cs" />
     <Compile Include="MasterDetail\IMasterDetail.cs" />
     <Compile Include="MasterDetail\MasterDetailControl.xaml.cs">
       <DependentUpon>MasterDetailControl.xaml</DependentUpon>
@@ -158,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HamburgerMenu\HamburgerMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HamburgerMenu\HamburgerMenuResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

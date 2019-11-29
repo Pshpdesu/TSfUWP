@@ -1,0 +1,39 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomComponents.HamburgerMenu">
+
+    <DataTemplate x:Key="HamburgerMenuItem_LeftSide"
+                  x:DataType="local:MenuItem">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0">
+                <Border BorderThickness="0" Child="{Binding Icon}"/>
+            </Button>
+            <TextBlock Grid.Column="1" Text="{Binding ItemText}"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="HamburgerMenuItem_RightSide"
+                  x:DataType="local:MenuItem">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="45"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1">
+                <Border BorderThickness="0" Child="{Binding Icon}"/>
+            </Button>
+            <TextBlock Grid.Column="0" Text="{Binding ItemText}"/>
+        </Grid>
+    </DataTemplate>
+    
+</ResourceDictionary>

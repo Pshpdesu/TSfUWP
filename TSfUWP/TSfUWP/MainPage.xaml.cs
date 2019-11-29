@@ -32,7 +32,7 @@ namespace TSfUWP
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var test = await UserProfile.GetRandomProfile();
+            var test = UserProfile.GetRandomProfile();
         }
     }
 }
