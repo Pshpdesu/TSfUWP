@@ -15,11 +15,11 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace CustomComponents
+namespace CustomComponents.HamburgerMenu
 {
-    public sealed partial class Profile : UserControl
+    public sealed partial class HamburgerMenuControl : UserControl
     {
-        public Profile()
+        public HamburgerMenuControl()
         {
             this.InitializeComponent();
         }
