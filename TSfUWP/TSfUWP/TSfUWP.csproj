@@ -156,6 +156,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Custom Components\CustomComponents.csproj">
+      <Project>{a9c627f9-4af7-4ec8-a135-a0ba4c81c5dd}</Project>
+      <Name>CustomComponents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestSolutionLibrary\TestSolutionLibrary.csproj">
       <Project>{4CD1CFAA-9449-4BDE-9C64-444CB5E924D4}</Project>
       <Name>TestSolutionLibrary</Name>

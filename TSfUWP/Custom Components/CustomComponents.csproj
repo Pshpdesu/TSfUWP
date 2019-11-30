@@ -129,6 +129,7 @@
       <DependentUpon>CommentProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommentProfile\CommentProfileViewModel.cs" />
+    <Compile Include="HamburgerMenu\govno.cs" />
     <Compile Include="HamburgerMenu\HamburgerMenuControl.xaml.cs">
       <DependentUpon>HamburgerMenuControl.xaml</DependentUpon>
     </Compile>

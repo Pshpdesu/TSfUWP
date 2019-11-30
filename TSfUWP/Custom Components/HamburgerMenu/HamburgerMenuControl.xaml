@@ -14,12 +14,44 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="HamburgerMenuResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="HamburgerMenuItem_LeftSide"
+                          x:DataType="local:MenuItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" >
+                        <Border BorderThickness="0" Child="{Binding Icon}"/>
+                    </Button>
+                    <TextBlock Grid.Column="1" Text="{Binding ItemText}"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="HamburgerMenuItem_RightSide"
+                          x:DataType="local:MenuItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="45"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Command="{Binding onClick}">
+                        <Border BorderThickness="0" Child="{Binding Icon}"/>
+                    </Button>
+                    <TextBlock Grid.Column="0" Text="{Binding ItemText}"/>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
 
     </UserControl.Resources>
 
     <Grid>
-        <SplitView x:Name="HamburgerView">
+        <SplitView x:Name="HamburgerView" DisplayMode="CompactOverlay">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -27,10 +59,13 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Button Width="48" Height="48">
+                    <Button Width="48" Height="48" Click="Button_Click">
                         <SymbolIcon Symbol="GlobalNavigationButton" />
                     </Button>
-                    <ListView x:Name="MenuItemsList" DataContext="{x:Bind MenuItems}">
+                    <ListView Grid.Row="1" x:Name="MenuItemsList" 
+                              DataContext="{x:Bind MenuItems}">
+                    </ListView>
+                    <ListView Grid.Row="2" x:Name="BottomMenuItemsList">
                         
                     </ListView>
                 </Grid>

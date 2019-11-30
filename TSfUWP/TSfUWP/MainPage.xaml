@@ -9,5 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Border BorderThickness="0" x:Name="panel" Background="WhiteSmoke">
+        </Border>
     </Grid>
 </Page>

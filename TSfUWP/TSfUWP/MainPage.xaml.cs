@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CustomComponents.HamburgerMenu;
+using CustomComponents.MasterDetail;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,7 +35,58 @@ namespace TSfUWP
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var test = UserProfile.GetRandomProfile();
+            var hamburgerMenu = new HamburgerMenuControl();
+            hamburgerMenu.HorizontalAlignment = HorizontalAlignment.Stretch;
+            hamburgerMenu.VerticalAlignment = VerticalAlignment.Stretch;
+            List<MenuItem> commands = new List<MenuItem>()
+            {
+                new MenuItem(){
+                    Icon =new SymbolIcon(Symbol.Home),
+                    ItemText = "Home",
+                    onClick = new Command(async obj=>
+                    {
+                        await hamburgerMenu.SetPage(new MasterDetailControl());
+                    })
+                },
+                new MenuItem()
+                {
+                    Icon = new SymbolIcon(Symbol.AlignLeft),
+                    ItemText = "Test1",
+                    onClick = new Command(async obj =>
+                    {
+                        await hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
+                                                                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+                                                                            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                                                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                                                                            deserunt mollit anim id est laborum.",
+                                                                            TextAlignment=TextAlignment.Center,
+                                                                            HorizontalAlignment = HorizontalAlignment.Stretch
+                        });
+                    })
+                },
+                new MenuItem()
+                {
+                    Icon = new SymbolIcon(Symbol.AlignLeft),
+                    ItemText = "Test2",
+                    onClick = new Command(async obj =>
+                    {
+                        await hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
+                                                                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+                                                                            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                                                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                                                                            deserunt mollit anim id est laborum.",
+                                                                            TextAlignment=TextAlignment.Right,
+                                                                            HorizontalAlignment = HorizontalAlignment.Stretch
+                        });
+                    })
+                },
+            };
+            hamburgerMenu.SetMenuItems(commands);
+            panel.Child = hamburgerMenu;
         }
     }
 }
