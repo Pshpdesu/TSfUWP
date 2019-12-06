@@ -16,41 +16,76 @@
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate x:Key="HamburgerMenuItem_LeftSide"
                           x:DataType="local:MenuItem">
-                <Grid>
+                <Grid HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="48"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="48"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" >
-                        <Border BorderThickness="0" Child="{Binding Icon}"/>
-                    </Button>
-                    <TextBlock Grid.Column="1" Text="{Binding ItemText}"/>
+                    <SymbolIcon Grid.Column="0" Width="48" Height="48" Symbol="{Binding Icon}"/>
+                    <TextBlock VerticalAlignment="Center"
+                               Grid.Column="1" Text="{Binding ItemText}"/>
                 </Grid>
             </DataTemplate>
             <DataTemplate x:Key="HamburgerMenuItem_RightSide"
                           x:DataType="local:MenuItem">
-                <Grid>
+                <Grid HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="48"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="48"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Command="{Binding onClick}">
-                        <Border BorderThickness="0" Child="{Binding Icon}"/>
-                    </Button>
-                    <TextBlock Grid.Column="0" Text="{Binding ItemText}"/>
+                    <SymbolIcon Grid.Column="1" Width="48" Height="48" Symbol="{Binding Icon}"/>
+                    <TextBlock  VerticalAlignment="Center"
+                                Grid.Column="0" Text="{Binding ItemText}"/>
                 </Grid>
             </DataTemplate>
+            <Style TargetType="ListViewItem" x:Key="LeftListItem">
+                <Setter Property="Padding" Value="0,0,12,0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+            <Style TargetType="ListViewItem" x:Key="RightListItem">
+                <Setter Property="Padding" Value="12,0,0,0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="ListView" x:Key="LeftList" >
+                <Setter Property="ItemTemplate" Value="{StaticResource HamburgerMenuItem_LeftSide}"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource LeftListItem}"/>
+            </Style>
+            <Style TargetType="ListView" x:Key="RightList">
+                <Setter Property="ItemTemplate" Value="{StaticResource HamburgerMenuItem_RightSide}"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource RightListItem}"/>
+            </Style>
         </ResourceDictionary>
-
     </UserControl.Resources>
 
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="States" >
+                <VisualState x:Name="LeftState">
+                    <VisualState.Setters>
+                        <Setter Target="HiddingButton.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="HamburgerView.PanePlacement" Value="Left"/>
+                        <Setter Target="MenuItemsList.Style" Value="{StaticResource LeftList}" />
+                        <Setter Target="BottomMenuItemsList.Style" Value="{StaticResource LeftList}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="RightState">
+                    <VisualState.Setters>
+                        <Setter Target="HiddingButton.HorizontalAlignment" Value="Right"/>
+                        <Setter Target="HamburgerView.PanePlacement" Value="Right"/>
+                        <Setter Target="MenuItemsList.Style" Value="{StaticResource RightList}" />
+                        <Setter Target="BottomMenuItemsList.Style" Value="{StaticResource RightList}"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView x:Name="HamburgerView" DisplayMode="CompactOverlay">
             <SplitView.Pane>
                 <Grid>
@@ -59,18 +94,25 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Button Width="48" Height="48" Click="Button_Click">
+                    <Button x:Name="HiddingButton" Width="48" Height="48" Click="Button_Click">
                         <SymbolIcon Symbol="GlobalNavigationButton" />
                     </Button>
                     <ListView Grid.Row="1" x:Name="MenuItemsList" 
-                              DataContext="{x:Bind MenuItems}">
+                              DataContext="{x:Bind MenuItems}" 
+                              HorizontalAlignment="Stretch"
+                              Padding="0" Margin="0"
+                              IsItemClickEnabled="True"
+                              ItemClick="MenuItemsList_ItemClick">
                     </ListView>
-                    <ListView Grid.Row="2" x:Name="BottomMenuItemsList">
-                        
+
+                    <ListView Grid.Row="2" x:Name="BottomMenuItemsList" 
+                              HorizontalAlignment="Stretch"
+                              IsItemClickEnabled="True"
+                              ItemClick="MenuItemsList_ItemClick">
                     </ListView>
                 </Grid>
             </SplitView.Pane>
-            <Border BorderThickness="0" x:Name="Page"></Border>
+            <Frame BorderThickness="0" x:Name="Page"></Frame>
         </SplitView>
     </Grid>
 </UserControl>

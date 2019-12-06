@@ -32,29 +32,33 @@ namespace TSfUWP
             this.InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs ea)
         {
-            base.OnNavigatedTo(e);
+            base.OnNavigatedTo(ea);
             var hamburgerMenu = new HamburgerMenuControl();
-            hamburgerMenu.HorizontalAlignment = HorizontalAlignment.Stretch;
-            hamburgerMenu.VerticalAlignment = VerticalAlignment.Stretch;
+            panel.Child = hamburgerMenu;
+            //hamburgerMenu.HorizontalAlignment = HorizontalAlignment.Stretch;
+            //hamburgerMenu.VerticalAlignment = VerticalAlignment.Stretch;
             List<MenuItem> commands = new List<MenuItem>()
             {
                 new MenuItem(){
-                    Icon =new SymbolIcon(Symbol.Home),
+                    Icon =Symbol.Home,
                     ItemText = "Home",
-                    onClick = new Command(async obj=>
+                    onClick = new Command(obj=>
                     {
-                        await hamburgerMenu.SetPage(new MasterDetailControl());
+                        hamburgerMenu.SetPage(new MasterDetailControl());
+                    }),
+                    OnItemClick = new MenuItem.onItemClick((e, v)=>{
+                        hamburgerMenu.SetPage(new MasterDetailControl());
                     })
                 },
                 new MenuItem()
                 {
-                    Icon = new SymbolIcon(Symbol.AlignLeft),
+                    Icon = Symbol.AlignLeft,
                     ItemText = "Test1",
-                    onClick = new Command(async obj =>
+                    onClick = new Command(obj =>
                     {
-                        await hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                                                                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                                                                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
                                                                             ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
@@ -68,11 +72,11 @@ namespace TSfUWP
                 },
                 new MenuItem()
                 {
-                    Icon = new SymbolIcon(Symbol.AlignLeft),
+                    Icon = Symbol.AlignLeft,
                     ItemText = "Test2",
-                    onClick = new Command(async obj =>
+                    onClick = new Command(obj =>
                     {
-                        await hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                                                                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                                                                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
                                                                             ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
@@ -82,11 +86,39 @@ namespace TSfUWP
                                                                             TextAlignment=TextAlignment.Right,
                                                                             HorizontalAlignment = HorizontalAlignment.Stretch
                         });
+                    }),
+                },
+                new MenuItem()
+                {
+                    Icon = Symbol.DockLeft,
+                    ItemText="Change Pane Alignment to Left",
+                    OnItemClick = new MenuItem.onItemClick((e, v) =>
+                    {
+                        hamburgerMenu.ChangeMenuSide(SplitViewPanePlacement.Left);
                     })
                 },
+                new MenuItem()
+                {
+                    Icon = Symbol.DockRight,
+                    ItemText="Change Pane Alignment to Right",
+                    OnItemClick = new MenuItem.onItemClick((e, v) =>
+                    {
+                        hamburgerMenu.ChangeMenuSide(SplitViewPanePlacement.Right);
+                    })
+                }
             };
-            hamburgerMenu.SetMenuItems(commands);
-            panel.Child = hamburgerMenu;
+            List<MenuItem> bottomCommands = new List<MenuItem>() {
+                new MenuItem()
+                {
+                    Icon = Symbol.SwitchApps,
+                    ItemText = "Switch side",
+                    OnItemClick = new MenuItem.onItemClick((e, v) =>
+                    {
+                        hamburgerMenu.SwitchPaneSide();
+                    })
+                }
+            };
+            hamburgerMenu.SetMenuItems(commands,bottomCommands);
         }
     }
 }

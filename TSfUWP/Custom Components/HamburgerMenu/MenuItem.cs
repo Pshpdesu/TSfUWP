@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace CustomComponents.HamburgerMenu
 {
     public class MenuItem
     {
         public string ItemText { get; set; }
-        public IconElement Icon { get; set; }
+        public Symbol Icon { get; set; }
         public Command onClick { get; set; }
+        public delegate void onItemClick(object sender, TappedRoutedEventArgs e);
+        public onItemClick OnItemClick { get; set; }
 
     }
     public class Command : ICommand
@@ -32,10 +35,15 @@ namespace CustomComponents.HamburgerMenu
 
         public bool CanExecute(object parameter)
         {
-            return canExecute.Equals(null) ? true : canExecute(parameter);
+            return Object.Equals(canExecute, null) ? true : canExecute(parameter);
         }
 
-        public async void Execute(object parameter)
+        public void Execute(object parameter)
+        {
+            action(parameter);
+        }
+
+        public async void ExecuteAsync(object parameter)
         {
             await Task.Run(()=>action(parameter));
         }

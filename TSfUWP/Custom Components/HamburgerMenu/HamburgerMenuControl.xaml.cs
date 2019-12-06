@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -19,72 +20,108 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CustomComponents.HamburgerMenu
 {
+    [TemplateVisualState(Name ="LeftState", GroupName ="States")]
+    [TemplateVisualState(Name ="RightState", GroupName ="States")]
     public sealed partial class HamburgerMenuControl : UserControl
     {
-        ObservableCollection<MenuItem> MenuItems { get; set; } = new ObservableCollection<MenuItem>();
-        ObservableCollection<MenuItem> BottomMenuItems { get; set; } = new ObservableCollection<MenuItem>();
+        ObservableCollection<MenuItem> MenuItems { get; set; }
+            = new ObservableCollection<MenuItem>();
+        ObservableCollection<MenuItem> BottomMenuItems { get; set; }
+            = new ObservableCollection<MenuItem>();
 
-        public HamburgerMenuControl(IEnumerable<MenuItem> commands) : this()
+
+        public HamburgerMenuControl(SplitViewPanePlacement placement = SplitViewPanePlacement.Left):this()
         {
-            MenuItems = new ObservableCollection<MenuItem>(commands);
+            ChangeMenuSide(placement);
+            
         }
-
-        public HamburgerMenuControl()
+        private HamburgerMenuControl()
         {
             this.InitializeComponent();
-            SetLeft();
-            this.Resources.TryGetValue("HamburgerMenuItem_LeftSide", out var test);
-            var test2 = this.Resources.ToDictionary((value) => value.Key);
-
+            MenuItemsList.ItemsSource = MenuItems;
+            BottomMenuItemsList.ItemsSource = BottomMenuItems;
+            //this.HamburgerView.Pane.Translation += new Vector3(0, 0, 32);
         }
 
-        public async Task SetPage(UIElement page)
+        public void SetPage(Type page, object parameter)
         {
-            await Task.Run(() => { this.Page.Child = page; });
+            if (parameter == null)
+                parameter = new object();
+            this.Page.Navigate(page, parameter);
         }
 
-        public async Task ChangeMenuSide(SplitViewPanePlacement placement)
+        public void SetPage(UIElement page)
+        {
+            this.Page.Content = page;
+        }
+
+        public void ChangeMenuSide(SplitViewPanePlacement placement)
         {
             switch (placement)
             {
                 case SplitViewPanePlacement.Right:
-                    await Task.Run(() => SetRight());
+                    SetRight();
                     break;
                 case SplitViewPanePlacement.Left:
-                    await Task.Run(() => SetRight());
+                    SetLeft();
                     break;
             }
         }
 
-        public async void SetMenuItems(IEnumerable<MenuItem> commands)
+        public void SetMenuItems(IEnumerable<MenuItem> commands = null, IEnumerable<MenuItem> bottomCommands = null)
         {
-            await Task.Run(() =>
-            MenuItems = new ObservableCollection<MenuItem>(commands));
-            //MenuItems = new ObservableCollection<MenuItem>(commands);
+            if (commands != null)
+            {
+                MenuItems.Clear();
+                foreach (var command in commands)
+                {
+                    MenuItems.Add(command);
+                }
+            }
+            if (bottomCommands != null)
+            {
+                BottomMenuItems.Clear();
+                foreach (var command in bottomCommands)
+                {
+                    BottomMenuItems.Add(command);
+                }
+            }
         }
 
+        public void SwitchPaneSide()
+        {
+            switch (HamburgerView.PanePlacement) {
+                case SplitViewPanePlacement.Left:
+                    this.SetRight();
+                    break;
+                case SplitViewPanePlacement.Right:
+                    this.SetLeft();
+                    break;
+            }
+        }
         private void SetRight()
         {
-            this.HamburgerView.PanePlacement = SplitViewPanePlacement.Right;
-            this.Resources.TryGetValue("HamburgerMenuItem_RightSide", out var template);
-            this.MenuItemsList.ItemTemplate = template as DataTemplate;
-            this.MenuItemsList.HorizontalAlignment = HorizontalAlignment.Right;
-            this.BottomMenuItemsList.ItemTemplate = template as DataTemplate;
-            this.BottomMenuItemsList.HorizontalAlignment = HorizontalAlignment.Right;
+            var a = VisualStateManager.GoToState(this, "RightState", false);
         }
         private void SetLeft()
         {
-            this.HamburgerView.PanePlacement = SplitViewPanePlacement.Left;
-            this.Resources.TryGetValue("HamburgerMenuItem_LeftSide", out var template);
-            this.MenuItemsList.ItemTemplate = template as DataTemplate;
-            this.MenuItemsList.HorizontalAlignment = HorizontalAlignment.Left;
-            this.BottomMenuItemsList.ItemTemplate = template as DataTemplate;
-            this.BottomMenuItemsList.HorizontalAlignment = HorizontalAlignment.Left;
+            VisualStateManager.GoToState(this, "LeftState", false);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.HamburgerView.IsPaneOpen = !this.HamburgerView.IsPaneOpen;
+        }
+
+        private void MenuItemsList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = e.ClickedItem as MenuItem;
+            item.OnItemClick?.Invoke(sender, null);
+        }
+
+        private void ListViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }
