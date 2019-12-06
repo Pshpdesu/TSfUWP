@@ -17,7 +17,7 @@
             <SplitView.Pane>
                 <Grid></Grid>
             </SplitView.Pane>
-            <Border x:Name="Detail" BorderThickness="0">
+            <Border x:Name="Detail" BorderThickness="0" Background="Black">
                 
             </Border>
         </SplitView>

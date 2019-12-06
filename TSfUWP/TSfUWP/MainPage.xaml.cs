@@ -44,10 +44,6 @@ namespace TSfUWP
                 new MenuItem(){
                     Icon =Symbol.Home,
                     ItemText = "Home",
-                    onClick = new Command(obj=>
-                    {
-                        hamburgerMenu.SetPage(new MasterDetailControl());
-                    }),
                     OnItemClick = new MenuItem.onItemClick((e, v)=>{
                         hamburgerMenu.SetPage(new MasterDetailControl());
                     })
@@ -56,7 +52,7 @@ namespace TSfUWP
                 {
                     Icon = Symbol.AlignLeft,
                     ItemText = "Test1",
-                    onClick = new Command(obj =>
+                    OnItemClick = new MenuItem.onItemClick((e,v) =>
                     {
                         hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                                                                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -66,7 +62,7 @@ namespace TSfUWP
                                                                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
                                                                             deserunt mollit anim id est laborum.",
                                                                             TextAlignment=TextAlignment.Center,
-                                                                            HorizontalAlignment = HorizontalAlignment.Stretch
+                                                                            HorizontalAlignment = HorizontalAlignment.Stretch,
                         });
                     })
                 },
@@ -74,7 +70,7 @@ namespace TSfUWP
                 {
                     Icon = Symbol.AlignLeft,
                     ItemText = "Test2",
-                    onClick = new Command(obj =>
+                    OnItemClick = new MenuItem.onItemClick((e,v)=>
                     {
                         hamburgerMenu.SetPage(new TextBlock(){Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                                                                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

@@ -14,7 +14,7 @@ namespace CustomComponents.HamburgerMenu
     {
         public string ItemText { get; set; }
         public Symbol Icon { get; set; }
-        public Command onClick { get; set; }
+        //public Command onClick { get; set; }
         public delegate void onItemClick(object sender, TappedRoutedEventArgs e);
         public onItemClick OnItemClick { get; set; }
 
