@@ -41,10 +41,10 @@ namespace CustomComponents.AlbumView
             var typedSender = sender as ScrollViewer;
             manipstarted = true;
             var curMode = e.Mode;
-            //manipstarted = e.Mode == ManipulationModes.TranslateX;
-            //typedSender.
+            manipstarted = e.Mode == ManipulationModes.TranslateX;
+            //typedsender.
             isPicSmaller = typedSender.ZoomFactor <= 1;
-            //isPicSmaller = (img.Height <= sv.ActualHeight) || (img.Width<= sv.ActualWidth);
+            isPicSmaller = (img.Height <= sv.ActualHeight) || (img.Width <= sv.ActualWidth);
 
         }
 
